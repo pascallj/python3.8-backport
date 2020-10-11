@@ -1,0 +1,27 @@
+Index: b/debian/control
+===================================================================
+--- a/debian/control
++++ b/debian/control
+@@ -18,7 +18,7 @@
+   mime-support, netbase, bzip2, time, python3@bd_qual@, @PVER@@bd_qual@ <cross>,
+   net-tools, xvfb <!nocheck>, xauth <!nocheck>,
+   systemtap-sdt-dev
+-Build-Depends-Indep: python3-sphinx, python3-docs-theme, texinfo
++Build-Depends-Indep: python3-sphinx:all, python3-docs-theme:all, texinfo
+ Standards-Version: 4.5.0
+ Vcs-Browser: https://salsa.debian.org/cpython-team/python3/tree/python3.8
+ Vcs-Git: https://salsa.debian.org/cpython-team/python3.git -b python3.8
+
+Index: b/debian/rules
+===================================================================
+--- a/debian/rules
++++ b/debian/rules
+@@ -1353,7 +1353,7 @@
+ 	done
+ 
+ 	: # devhelp docs
+-	cd $(buildd_static) && ./python ../debian/pyhtml2devhelp.py \
++	cd $(buildd_static) && python3.8 ../debian/pyhtml2devhelp.py \
+ 		../$(d_doc)/usr/share/doc/$(p_base)/html index.html $(VER) \
+ 		> ../$(d_doc)/usr/share/doc/$(p_base)/html/$(PVER).devhelp
+ 	gzip -9nv $(d_doc)/usr/share/doc/$(p_base)/html/$(PVER).devhelp
