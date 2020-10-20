@@ -22,7 +22,7 @@ sudo apt-key add deb-pascalroeleven.gpg
 ```
 
 ## Support
-Currently there is support for **`amd64`** and **`armhf`** architectures. The `amd64` packages are build natively while the `armhf` packages are crossbuilt. Testing is not possible while crossbuilding, so these packages did not undergo the same amount of testing as usual Debian packages do.
+Currently there is support for **`amd64`**, **`arm64`** and **`armhf`** architectures. The `amd64` packages are build natively while the `arm64` and `armhf` packages are crossbuilt. Testing is not possible while crossbuilding, so these packages did not undergo the same amount of testing as usual Debian packages do.
 
 ## Building the packages yourself
 If you want to build the packages yourself, you can use the Dockerfile and the patches in this repository. Patches will be applied by the Dockerfile.
