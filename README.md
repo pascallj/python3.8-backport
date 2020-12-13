@@ -39,4 +39,9 @@ You can also specify your name, email and changelog message when building which 
 docker build --target native --build-arg NAME="James Smith" --build-arg EMAIL="jamessmith@example.org" --build-arg CHANGE="Initial backport for buster" .
 ```
 
+If you want to build against the debian `sid` branch instead of `bullseye`, you can specify this with the `DEV=yes` build argument:
+```sh
+docker build --target native --build-arg DEV=yes .
+```
+
 Building natively takes about 2 hours on a modern decent PC because of the extensive testing. Cross building takes about 30 minutes (but uses native binaries so requires the extra 2 hours the first time).

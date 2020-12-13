@@ -1,11 +1,25 @@
-FROM debian:buster-slim AS build-system
-RUN echo 'deb http://deb.debian.org/debian sid main\n\
-deb-src http://deb.debian.org/debian sid main'\
+FROM debian:buster-slim AS environment
+ARG DEV=no
+RUN if [ ${DEV} = "yes" ]; then echo '\
+deb http://deb.debian.org/debian sid main\n\
+deb-src http://deb.debian.org/debian sid main'; \
+else echo '\
+deb http://deb.debian.org/debian bullseye main\n\
+deb-src http://deb.debian.org/debian bullseye main'; \
+fi \
 >> /etc/apt/sources.list
-RUN echo 'Package: *\n\
+RUN if [ ${DEV} = "yes" ]; then echo '\
+Package: *\n\
 Pin: release n=sid\n\
-Pin-Priority: 1'\
-> /etc/apt/preferences.d/99sid-testing
+Pin-Priority: 1'; \
+else echo '\
+Package: *\n\
+Pin: release n=bullseye\n\
+Pin-Priority: 1'; \
+fi \
+> /etc/apt/preferences.d/99pinning
+
+FROM environment AS build-system
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y build-essential fakeroot devscripts
 WORKDIR /usr/local/src
