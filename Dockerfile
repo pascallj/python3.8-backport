@@ -12,8 +12,8 @@ WORKDIR /usr/local/src
 RUN apt-get source python3.8
 RUN mv python3.8*/ python-source
 WORKDIR python-source
-ADD distutils-dep.diff debian/patches/
-RUN echo 'distutils-dep.diff' >> debian/patches/series
+ADD distutils-dep.diff .
+RUN patch -p1 < distutils-dep.diff
 ARG NAME
 ARG EMAIL
 ARG CHANGE=Backport
