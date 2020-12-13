@@ -3,7 +3,7 @@ Index: b/debian/control
 --- a/debian/control
 +++ b/debian/control
 @@ -18,7 +18,7 @@
-   mime-support, netbase, bzip2, time, python3@bd_qual@, @PVER@@bd_qual@ <cross>,
+   mime-support, netbase, bzip2, time, python3:any, python3.8:any <cross>,
    net-tools, xvfb <!nocheck>, xauth <!nocheck>,
    systemtap-sdt-dev
 -Build-Depends-Indep: python3-sphinx, python3-docs-theme, texinfo
