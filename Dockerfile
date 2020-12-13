@@ -1,11 +1,11 @@
 FROM debian:buster-slim AS build-system
-RUN echo 'deb http://deb.debian.org/debian bullseye main\n\
-deb-src http://deb.debian.org/debian bullseye main'\
+RUN echo 'deb http://deb.debian.org/debian sid main\n\
+deb-src http://deb.debian.org/debian sid main'\
 >> /etc/apt/sources.list
 RUN echo 'Package: *\n\
-Pin: release n=bullseye\n\
+Pin: release n=sid\n\
 Pin-Priority: 1'\
-> /etc/apt/preferences.d/99bullseye-testing
+> /etc/apt/preferences.d/99sid-testing
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y build-essential fakeroot devscripts
 WORKDIR /usr/local/src
