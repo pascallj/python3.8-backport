@@ -5,10 +5,7 @@ The aim of this project is to provide a Python 3.8 backport to Debian buster. Pa
 Motivation for this project was the [deprecation of Python 3.7 support in Home Assistant](https://www.home-assistant.io/blog/2020/10/07/release-116/#python-37-deprecated). Support ends in version 0.118 which is scheduled for somewhere in December. While Debian bullseye will not be released anytime before April 2021. In the meantime, you can use this backport.
 
 ## Scope
-The scope of this project is limited to backporting just Python 3.8 itself. So no defaults (which provide virtual packages so `python3` get's automatically linked to `python3.8`), no pip and no pip-packages. This version should be an extension to your system, but it's not meant to replace an existing Python installation.
-
-### Virtual enviroment
-To make the `venv` module work without backporting all pip-related packages, the `python3.8-venv` package depends on `python3-distutils` which is present in buster. After you have created your virtual enviroment you can then update pip itself and any packages as usual.
+The scope of this project is limited to backporting just Python 3.8 itself. So no defaults (which provide virtual packages so `python3` get's automatically linked to `python3.8`) and no pip-packages. Therefore it can coexist with your regular Python (3.7) installation without any interference. It's main use is for in virtual enviroments where you can use pip to install any packages you desire.
 
 ## Repository
 You can download the packages in my repository at `deb.pascalroeleven.nl` by adding this line to your sources.list:
