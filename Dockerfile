@@ -16,7 +16,7 @@ ADD distutils-dep.diff .
 RUN patch -p1 < distutils-dep.diff
 ARG NAME
 ARG EMAIL
-ARG CHANGE=Backport
+ARG CHANGE
 RUN dch --bpo "$CHANGE"
 
 FROM build-system AS native
