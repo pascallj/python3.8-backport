@@ -1,0 +1,97 @@
+name: Build all packages
+on: workflow_dispatch
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    name: Build native packages
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: satackey/action-docker-layer-caching@v0.0.11
+      # Ignore the failure of a step and avoid terminating the job.
+      continue-on-error: true
+
+    - name: Build the Docker image
+      env:
+        NAME: ${{ secrets.changelog_name }}
+        EMAIL: ${{ secrets.changelog_email }}
+      run: >-
+        docker build
+        --target native
+        --build-arg NAME
+        --build-arg EMAIL
+        -t native-build .
+
+    - name: Extract artifacts from image
+      run: docker run -v /artifacts:/usr/local/src/python-source/artifacts native-build
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: native-debs
+        path: /artifacts
+
+  crossbuild-armhf:
+    runs-on: ubuntu-latest
+    name: Crossbuild armhf packages
+    needs: native
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: satackey/action-docker-layer-caching@v0.0.11
+      # Ignore the failure of a step and avoid terminating the job.
+      continue-on-error: true
+      with:
+        skip-save: true
+
+    - name: Build the Docker image
+      env:
+        NAME: ${{ secrets.changelog_name }}
+        EMAIL: ${{ secrets.changelog_email }}
+      run: >-
+        docker build
+        --target crossbuild
+        --build-arg CROSSBUILD=armhf
+        --build-arg NAME
+        --build-arg EMAIL
+        -t armhf-build .
+
+    - name: Extract artifacts from image
+      run: docker run -v /artifacts:/usr/local/src/python-source/artifacts armhf-build
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: crossbuild-armhf
+        path: /artifacts
+
+  crossbuild-arm64:
+    runs-on: ubuntu-latest
+    name: Crossbuild arm64 packages
+    needs: native
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: satackey/action-docker-layer-caching@v0.0.11
+      # Ignore the failure of a step and avoid terminating the job.
+      continue-on-error: true
+      with:
+        skip-save: true
+
+    - name: Build the Docker image
+      env:
+        NAME: ${{ secrets.changelog_name }}
+        EMAIL: ${{ secrets.changelog_email }}
+      run: >-
+        docker build
+        --target crossbuild
+        --build-arg CROSSBUILD=arm64
+        --build-arg NAME
+        --build-arg EMAIL
+        -t arm64-build .
+
+    - name: Extract artifacts from image
+      run: docker run -v /artifacts:/usr/local/src/python-source/artifacts arm64-build
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: crossbuild-arm64
+        path: /artifacts

@@ -37,6 +37,7 @@ FROM build-system AS native
 RUN mk-build-deps --install --tool 'apt-get -y --no-install-recommends'
 RUN debuild -b -uc -us
 RUN mkdir debs && mv ../*.deb debs
+CMD mkdir -p artifacts && cp -r debs/. artifacts
 
 FROM build-system AS crossbuild
 ARG CROSSBUILD
@@ -56,3 +57,4 @@ RUN mk-build-deps --arch $CROSSBUILD --host-arch $CROSSBUILD
 RUN apt-get install -y ./python3.8-cross-build-deps*.deb
 RUN DEB_BUILD_OPTIONS='nocheck nobench' debuild -b -uc -us -a$CROSSBUILD
 RUN mkdir debs && mv ../*.deb debs
+CMD mkdir -p artifacts && cp -r debs/. artifacts
