@@ -18,6 +18,7 @@ jobs:
         DEV: ${{ fromJSON('["no", "yes"]')[github.ref == 'refs/heads/dev'] }}
       run: >-
         docker build
+        --no-cache
         --target native
         --build-arg NAME
         --build-arg EMAIL
