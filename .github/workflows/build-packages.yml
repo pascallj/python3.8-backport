@@ -1,0 +1,10 @@
+name: Build all packages
+on: workflow_dispatch
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    name: Build native packages
+
+    steps:
+    - name: Dummy workflow
+      run: echo "Just a placeholder until this workflow rolls out to the main branch."
