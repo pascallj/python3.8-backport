@@ -15,11 +15,13 @@ jobs:
       env:
         NAME: ${{ secrets.changelog_name }}
         EMAIL: ${{ secrets.changelog_email }}
+        DEV: ${{ fromJSON('["no", "yes"]')[github.ref == 'refs/heads/dev'] }}
       run: >-
         docker build
         --target native
         --build-arg NAME
         --build-arg EMAIL
+        --build-arg DEV
         -t native-build .
 
     - name: Extract artifacts from image
@@ -47,12 +49,14 @@ jobs:
       env:
         NAME: ${{ secrets.changelog_name }}
         EMAIL: ${{ secrets.changelog_email }}
+        DEV: ${{ fromJSON('["no", "yes"]')[github.ref == 'refs/heads/dev'] }}
       run: >-
         docker build
         --target crossbuild
         --build-arg CROSSBUILD=armhf
         --build-arg NAME
         --build-arg EMAIL
+        --build-arg DEV
         -t armhf-build .
 
     - name: Extract artifacts from image
@@ -80,12 +84,14 @@ jobs:
       env:
         NAME: ${{ secrets.changelog_name }}
         EMAIL: ${{ secrets.changelog_email }}
+        DEV: ${{ fromJSON('["no", "yes"]')[github.ref == 'refs/heads/dev'] }}
       run: >-
         docker build
         --target crossbuild
         --build-arg CROSSBUILD=arm64
         --build-arg NAME
         --build-arg EMAIL
+        --build-arg DEV
         -t arm64-build .
 
     - name: Extract artifacts from image
