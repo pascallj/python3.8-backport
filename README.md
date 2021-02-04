@@ -2,7 +2,7 @@
 
 The aim of this project is to provide a Python 3.8 backport to Debian buster. Packages are of course much better manageable then compiling the source from scratch.
 
-Motivation for this project was the [deprecation of Python 3.7 support in Home Assistant](https://www.home-assistant.io/blog/2020/10/07/release-116/#python-37-deprecated). Support ends in version 0.118 which is scheduled for somewhere in December. While Debian bullseye will not be released anytime before April 2021. In the meantime, you can use this backport.
+Motivation for this project was the [deprecation of Python 3.7 support in Home Assistant 0.116](https://www.home-assistant.io/blog/2020/10/07/release-116/#python-37-deprecated). Support ended in version 2021.2 which was released on February 3, 2021. Debian bullseye (which will contain Python 3.9) will not be released anytime before April 2021. In the meantime, you can use this backport.
 
 ## Scope
 The scope of this project is limited to backporting just Python 3.8 itself. So no defaults (which provide virtual packages so `python3` get's automatically linked to `python3.8`) and no pip-packages. Therefore it can coexist with your regular Python (3.7) installation without any interference. It's main use is for in virtual enviroments where you can use pip to install any packages you desire.
