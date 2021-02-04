@@ -1,11 +1,13 @@
 # Python 3.8 Backport for Debian buster
 
-The aim of this project is to provide a Python 3.8 backport to Debian buster. Packages are of course much better manageable then compiling the source from scratch.
+The aim of this project is to provide a Python 3.8 backport to Debian buster. Packages are of course much better manageable than compiling the source from scratch.
 
 Motivation for this project was the [deprecation of Python 3.7 support in Home Assistant 0.116](https://www.home-assistant.io/blog/2020/10/07/release-116/#python-37-deprecated). Support ended in version 2021.2 which was released on February 3, 2021. Debian bullseye (which will contain Python 3.9) will not be released anytime before April 2021. In the meantime, you can use this backport.
 
+More information about the use of this packages/repository for Home Assistant can be found on a [Home Assistant Community post](https://community.home-assistant.io/t/home-assistant-core-python-3-8-backport-for-debian-buster/234859/) I've written.
+
 ## Scope
-The scope of this project is limited to backporting just Python 3.8 itself. So no defaults (which provide virtual packages so `python3` get's automatically linked to `python3.8`) and no pip-packages. Therefore it can coexist with your regular Python (3.7) installation without any interference. It's main use is for in virtual enviroments where you can use pip to install any packages you desire.
+The scope of this project is limited to backporting just Python 3.8 itself. So no defaults (which provide virtual packages so `python3` get's automatically linked to `python3.8`) and no precompiled pip-packages or wheels. Therefore it can coexist with your regular Python (3.7) installation without any interference and still being simple to maintain. It's main use is for in virtual environments where you can use pip to compile and install any packages you desire. It does provide all the packages and dependencies needed to create a Python 3.8 virtual environment.
 
 ## Repository
 You can download the packages in my repository at `deb.pascalroeleven.nl` by adding this line to your sources.list:
