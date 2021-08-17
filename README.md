@@ -1,4 +1,5 @@
 # Python 3.8 Backport for Debian buster
+>***NOTE**: This git repository is now archived because Debian 11 bullseye has been released. The packages repository for Debian will still be available for some time depending on its usage.*
 
 The aim of this project is to provide a Python 3.8 backport to Debian buster. Packages are of course much better manageable than compiling the source from scratch.
 
